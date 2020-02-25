@@ -61,12 +61,25 @@ namespace TrafficStatistics
                     return;
                 var info = _SelectedItem.Tag as ItemInfo;
 
-                var tabPage = new TabPage($"{info.Protocol}:{info.LocalAddress}");
+                var tabPage = new TabPage($"{info.Protocol} - {info.LocalAddress} => {info.RemoteAddress}      ");
+                int index = 0;
+                foreach (Control ctr in tabControl1.TabPages)//to prevent add multiple item as same instances
+                {
+                    if(ctr.Text == tabPage.Text)
+                    {
+                        tabControl1.SelectTab(index);
+                        return;
+                    }
+                    index++;
+                }
+                
                 var body = new TrafficStatisticsPanel();
                 body.ItemInfo = info;
                 body.Dock = DockStyle.Fill;
                 tabPage.Controls.Add(body);
                 tabControl1.TabPages.Add(tabPage);
+                tabControl1.SelectTab(tabControl1.TabCount-1);
+
             }
             catch (Exception ex)
             {

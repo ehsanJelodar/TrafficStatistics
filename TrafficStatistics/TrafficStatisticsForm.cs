@@ -60,8 +60,16 @@ namespace TrafficStatistics
                 if (_SelectedItem == null || _SelectedItem.Tag == null || !(_SelectedItem.Tag is ItemInfo))
                     return;
                 var info = _SelectedItem.Tag as ItemInfo;
-
-                var tabPage = new TabPage($"{info.Protocol}:{info.LocalAddress}");
+                
+                var tabPage = new TabPage($"{info.Protocol} - {info.LocalAddress} => {info.RemoteAddress}      ");
+                foreach (Control ctr in tabControl1.TabPages)/// to prevent add multiple instace of one item 
+                {
+                    if(ctr.Text == tabPage.Text)
+                    {
+                        return;
+                    }
+                }
+               
                 var body = new TrafficStatisticsPanel();
                 body.ItemInfo = info;
                 body.Dock = DockStyle.Fill;

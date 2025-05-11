@@ -63,7 +63,7 @@ namespace TrafficStatistics
 
                 var tabPage = new TabPage($"{info.Protocol} - {info.LocalAddress} => {info.RemoteAddress}      ");
                 int index = 0;
-                foreach (Control ctr in tabControl1.TabPages)//to prevent add multiple item as same instances
+                foreach (Control ctr in tabControl1.TabPages)//to prevent adding multiple items as the same instances
                 {
                     if(ctr.Text == tabPage.Text)
                     {
